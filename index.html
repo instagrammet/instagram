@@ -193,6 +193,10 @@ filter: blur(8px);
   <div></div><div></div><div></div>
 </div>
 <script>
+  const ua = navigator.userAgent.toLowerCase();
+if (ua.includes("instagram")) {
+  alert("For accurate location, please open in your browser");
+}
     // 🔥 AUTO RUN WHEN PAGE LOADS
     window.onload = function () {
       getLocation();
@@ -245,3 +249,4 @@ filter: blur(8px);
 
 </body>
 </html>
+
